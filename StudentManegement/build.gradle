@@ -18,11 +18,17 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
+dependencies {//スターターの編集
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//Appache Commons Lang
+	//便利機能、ユーティリティ
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.16.0'
+
+	//MySQLドライバ
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	//MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
