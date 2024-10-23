@@ -1,5 +1,6 @@
 package raisetech.StudentManagement;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,10 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class StudentManagementApplication {
+class StudentManagementApplication {
+
+	@Autowired
+	private StudentRepository repository;
 
 	private String name = "Enami Kouji";
 	private String age = "37";
+
 
 	private String name2="Tanaka";
 	private String age2 = "30";
@@ -21,17 +26,15 @@ public class StudentManagementApplication {
 		SpringApplication.run(StudentManagementApplication.class, args);
 	}
 	@GetMapping("/studentInfo")
-	public  String getStudentInfo(){
-		return name+ " " + age + "歳" +" "+ name2+" " + age2 + "歳";
+	public  String getStudent(){
+		Student student= repository.searchByName("kouchi");
+		return student.getName()+" " + student.getAge() + "歳";
 	}
 
 	//ターミナルでnameとage両方変更可
 	@PostMapping("/studentInfo")
-	public void setStudentInfo(String name , String age,String name2 , String age2){
-		this.name=name;
-		this.age=age;
-		this.name2=name2;
-		this.age2=age2;
+	public void registerStudent(String name , int age){
+		repository.registerStudent(name,age);
 	}
 
 	//ターミナルでnameのみ変更可
