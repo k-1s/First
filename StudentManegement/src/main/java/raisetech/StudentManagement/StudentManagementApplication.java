@@ -25,23 +25,20 @@ class StudentManagementApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StudentManagementApplication.class, args);
 	}
-	@GetMapping("/studentInfo")
-	public  String getStudentInfo(){
+	@GetMapping("/student")
+	public  String getStudent(){
 		Student student= repository.searchByName("kouchi");
 		return student.getName()+" " + student.getAge() + "歳";
 	}
 
 	//ターミナルでnameとage両方変更可
-	@PostMapping("/studentInfo")
-	public void setStudentInfo(String name , String age,String name2 , String age2){
-		this.name=name;
-		this.age=age;
-		this.name2=name2;
-		this.age2=age2;
+	@PostMapping("/student")
+	public void registerStudent(String name , int age){
+		repository.registerStudent(name,age);
 	}
 
 	//ターミナルでnameのみ変更可
-	@PostMapping("/studentname")
+	@PostMapping("/studentName")
 	public void updateStudentName(String name){
 		this.name=name;
 	}
