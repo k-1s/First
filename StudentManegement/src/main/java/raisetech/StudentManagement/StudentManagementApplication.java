@@ -1,10 +1,13 @@
 package raisetech.StudentManagement;
 
+import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,10 +42,17 @@ class StudentManagementApplication {
 		repository.updateStudent(name,age);
 	}
 
+	@GetMapping("/studentlist")
+	public List<Student> getAllStudents() {
+		return repository.findAllStudents();
+	}
+
 	@DeleteMapping("/student")
 	public void deleteStudent(String name){
 		repository.deleteStudent(name);
 	}
+
+
 
 	/*@PostMapping("/studentInfo2")
 	public void updateStudentInfo2(String name2,String age2){
